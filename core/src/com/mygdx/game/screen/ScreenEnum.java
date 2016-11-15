@@ -14,7 +14,7 @@ public enum ScreenEnum {
     },
     LOOSE {
         public AbstractScreen getScreen(Object... params) {
-            return new LooseScreen();
+            return new LooseScreen((Integer) params[0]);
         }
     };
  
