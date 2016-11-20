@@ -7,4 +7,5 @@ public class Constants {
     public static int OBJECT_SIZE = 200;
     public static int WORLD_WIDTH = 1920;
     public static int WORLD_HEIGHT = 1080;
+    public static int ERROR_LIMIT = 20;
 }

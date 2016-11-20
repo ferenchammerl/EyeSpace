@@ -2,8 +2,7 @@ package com.mygdx.game.model;
 
 import com.badlogic.gdx.graphics.Texture;
 
-import static com.mygdx.game.Constants.WORLD_HEIGHT;
-import static com.mygdx.game.Constants.WORLD_WIDTH;
+import static com.mygdx.game.Constants.*;
 
 /**
  * Created by Ferenc_S on 11/14/2016.
@@ -24,7 +23,6 @@ public class EyeSpaceCrosshair extends EyeSpaceDrawable {
     public void setPosition(float x, float y) {
         int oldX = this.x;
         sendXTo(x);
-        System.out.println(String.format("Position X going from %s to %s towards %s", oldX, this.x, x));
         sendYTo(y);
     }
 
@@ -33,7 +31,7 @@ public class EyeSpaceCrosshair extends EyeSpaceDrawable {
         if (x < 0) x = 0;
         if (x > WORLD_WIDTH) x = WORLD_WIDTH;
         double actualSpeed = Math.sqrt(Math.abs(x - this.x)) * speed;
-        if (actualSpeed < 3) return;
+        if (Math.abs(x - this.x) < ERROR_LIMIT) return;
         this.x += x > this.x ? actualSpeed : -actualSpeed;
 //        if (Math.abs(x - this.x) > 30)
 //            this.x += (x - this.x) / 10;
@@ -43,7 +41,7 @@ public class EyeSpaceCrosshair extends EyeSpaceDrawable {
         if (y < 0) y = 0;
         if (y > WORLD_HEIGHT) y = WORLD_HEIGHT;
         double actualSpeed = Math.sqrt(Math.abs(y - this.y)) * speed;
-        if (actualSpeed < 3) return;
+        if (Math.abs(y - this.y) < ERROR_LIMIT) return;
         this.y += y > this.y ? actualSpeed : -actualSpeed;
 //        if (y < 0) y = 0;
 //        if (y > 1080) y = 1080;

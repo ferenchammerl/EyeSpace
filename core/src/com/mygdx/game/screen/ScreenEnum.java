@@ -12,9 +12,9 @@ public enum ScreenEnum {
             return new EyeSpaceGameScreen();
         }
     },
-    LOOSE {
+    LOSE {
         public AbstractScreen getScreen(Object... params) {
-            return new LooseScreen((Integer) params[0]);
+            return new LoseScreen((Integer) params[0]);
         }
     };
  

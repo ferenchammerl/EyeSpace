@@ -93,14 +93,19 @@ public class EyeSpaceGameScreen extends AbstractScreen {
         spawnAsteroid();
     }
 
-    private void update() throws GameOverException {
+    private void update() {
         spawn();
         boolean fire = Gdx.input.isButtonPressed(Input.Buttons.LEFT);
 
+
         for (EyeSpaceFaller eyeSpaceFaller : eyeSpaceFallers) {
-            eyeSpaceFaller.update(0);
-            if (fire && eyeSpaceFaller.hitbox(target.x, target.y) || eyeSpaceFaller.outOfBounds()) {
-                eyeSpaceFaller.setToBeDestroyed(true);
+            try {
+                eyeSpaceFaller.update(0);
+                if (fire && eyeSpaceFaller.hitbox(target.x, target.y) || eyeSpaceFaller.outOfBounds()) {
+                    eyeSpaceFaller.setToBeDestroyed(true);
+                }
+            } catch (GameOverException e) {
+                System.exit(0);
             }
         }
 
@@ -121,27 +126,23 @@ public class EyeSpaceGameScreen extends AbstractScreen {
     }
 
     public void render(float delta) {
-        try {
-            update();
-            Gdx.gl.glClearColor(0, 0, 0.2f, 1);
-            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-            camera.update();
-            batch.setProjectionMatrix(camera.combined);
+        update();
+        Gdx.gl.glClearColor(0, 0, 0.2f, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        camera.update();
+        batch.setProjectionMatrix(camera.combined);
 
-            batch.begin();
-            batch.draw(background, 0, 0, WORLD_WIDTH, WORLD_HEIGHT);
-            batch.end();
+        batch.begin();
+        batch.draw(background, 0, 0, WORLD_WIDTH, WORLD_HEIGHT);
+        batch.end();
 
-            for (EyeSpaceFaller drawable : eyeSpaceFallers) {
-                drawable.draw(batch, camera);
-            }
-
-            batch.begin();
-            batch.draw(crosshair, eyeSpaceCrosshair.getX() - OBJECT_SIZE / 2, eyeSpaceCrosshair.getY() - OBJECT_SIZE / 2, eyeSpaceCrosshair.getWidth(), eyeSpaceCrosshair.getHeight());
-            batch.end();
-        } catch (GameOverException e) {
-            this.dispose();
+        for (EyeSpaceFaller drawable : eyeSpaceFallers) {
+            drawable.draw(batch, camera);
         }
+
+        batch.begin();
+        batch.draw(crosshair, eyeSpaceCrosshair.getX() - OBJECT_SIZE / 2, eyeSpaceCrosshair.getY() - OBJECT_SIZE / 2, eyeSpaceCrosshair.getWidth(), eyeSpaceCrosshair.getHeight());
+        batch.end();
     }
 }
 

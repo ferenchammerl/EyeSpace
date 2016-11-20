@@ -11,14 +11,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.utils.Align;
 import com.mygdx.game.util.UIFactory;
 
-public class LooseScreen extends AbstractScreen {
+public class LoseScreen extends AbstractScreen {
 
 	private Texture textureBackground;
 	private Texture textureOkay;
 	private BitmapFont bitmapFont;
 	private Integer score;
 	
-	public LooseScreen(Integer score) {
+	public LoseScreen(Integer score) {
 		super();
 		this.textureBackground = new Texture(Gdx.files.internal("img/loose_bg.png"));
 		this.textureOkay = new Texture(Gdx.files.internal("img/ok_btn.png"));

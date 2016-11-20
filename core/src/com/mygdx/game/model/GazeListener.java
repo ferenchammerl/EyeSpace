@@ -12,7 +12,6 @@ public class GazeListener implements IGazeListener {
     }
 
     public void onGazeUpdate(GazeData gazeData) {
-        System.out.println(gazeData.smoothedCoordinates);
         this.game.setTarget(gazeData.smoothedCoordinates);
     }
 }
